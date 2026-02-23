@@ -40,13 +40,9 @@ pip install beautifulsoup4
 Open terminal in the project folder and run:
 
 ```
-python main.py <URL>
+python Part_1.py <URL>
 ```
-
-Example:
-
 ```
-python main.py https://example.com
-```
+python Part_2.py <URL1> <URL2>
 
 
