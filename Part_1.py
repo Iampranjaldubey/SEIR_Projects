@@ -4,56 +4,51 @@ from bs4 import BeautifulSoup
 
 def main():
 
-    if len(sys.argv) < 2:
+    if len(sys.argv)< 2:
 
-        print(" No URL provided.")
+        print("No URL provided")
 
         sys.exit(1)
 
-    url = sys.argv[1]
+    url =sys.argv[1]
 
     if not url.startswith("http://") and not url.startswith("https://"):
 
-        print("Invalid URL.")
+        print("Invalid URL")
 
         sys.exit(1)
 
+    
     try:
-        print("-Fetching data-")
+        print("Feching data")
 
         agents= {
         "User-Agent": "Mozilla/5.0"
         }
 
-        response = requests.get(url,headers=agents)
+        response =requests.get(url,headers=agents)
         response.raise_for_status()
 
-        print("Successfully fetched the page\n")
+        print("Successfuly fetched the page\n")
 
-        # Parse HTML using BeautifulSoup
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup= BeautifulSoup(response.text, "html.parser")
 
-        # Extract Page Title
-
-        print("PAGE TITLE")
+        print("PAGE TITLE ")
 
         if soup.title:
             print(soup.title.get_text().strip())
         else:
-            print("No title found.")
+            print("No title found")
 
-        #  Extract Page Body Text
-        print("\n PAGE BODY (TEXT ONLY) ")
+        print("\n PAGE BODY ")
 
         body = soup.body
         if body:
-            # get_text removes all HTML tags automatically
-            body_text = body.get_text(separator="\n", strip=True)
+            # removing HTML tags
+            body_text= body.get_text(separator="\n", strip=True)
             print(body_text)
         else:
-            print("No body content found.")
-
-        # Extract All URLs
+            print("No body content found")
         
         print("\n ALL LINKS ")
 
@@ -68,10 +63,10 @@ def main():
             for link in links:
                 print(link)
         else:
-            print("No links found.")
+            print("No links found")
 
     except requests.exceptions.RequestException as e:
-        print("Error while fetching the webpage:")
+        print("Error while fetching the webpage")
         print(e)
         sys.exit(1)
 
